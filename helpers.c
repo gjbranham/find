@@ -16,28 +16,28 @@
 
 bool search(int value, int values[], int n) // value==needle, values==haystack array, n==(length of values)/2
 {
-    if(n<=0)
+    if(n<=0) // Don't allow negative values
     {
         return false;
     }
     
-    int newhaystack[n/2];
+    int newhaystack[n/2]; // Will create a new list half the size of original
     
-    if(values[n/2]==value)
+    if(values[n/2]==value) // If middle element is the one we want, return true and exit function
     {
         printf("test\n");
         return true;
     }
-    else if(values[n/2]>value && n>1)
+    else if(values[n/2]>value && n>1) // If middle element is larger, create a new array of the lower half values
     {
         int i;
         for (i=0;i<n/2;i++)
         {
             newhaystack[i]=values[i];
         }
-        search(value,newhaystack,i);
+        search(value,newhaystack,i); // Recurse back to this function with the half-sized array
     }
-    else if(values[n/2]<value && n>1)
+    else if(values[n/2]<value && n>1) // If middle element is smaller, create a new array of the upper half
     {
         int mid=n/2+1;
         int i;
@@ -46,10 +46,10 @@ bool search(int value, int values[], int n) // value==needle, values==haystack a
             newhaystack[i]=values[mid];
             mid++;
         }
-        search(value,newhaystack,i);
+        search(value,newhaystack,i); // Recurse back to this function with the half sized array
     }
     
-    return false;
+    return false; // If the recursed array gets down to size==1 and no match is found, return false and exit
 }
 
 
